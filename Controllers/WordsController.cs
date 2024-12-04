@@ -14,7 +14,7 @@ public class WordsController : Controller
         _wordsRepository = wordsRepository;
     }
     // GET
-    
+
     [HttpGet]
     public async Task<IActionResult> Add()
     {
@@ -34,23 +34,24 @@ public class WordsController : Controller
         await _wordsRepository.AddWordAsync(word);
         return RedirectToAction("List");
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> List()
     {
         var words = await _wordsRepository.GetAllWordsAsync();
         return View(words);
     }
+
     [HttpGet]
     public async Task<IActionResult> Edit(Guid id)
     {
         var words = await _wordsRepository.GetWordAsync(id);
-            
+
         if (words != null)
         {
             var editWordsRequest = new EditWordsRequest
             {
-               Id = words.Id,
+                Id = words.Id,
                 Hungarian = words.Hungarian,
                 English = words.English,
                 CorrectSpanish = words.CorrectSpanish
@@ -61,6 +62,7 @@ public class WordsController : Controller
 
         return View(null);
     }
+
     [HttpPost]
     public async Task<IActionResult> Edit(EditWordsRequest editWordsRequest)
     {
@@ -85,6 +87,19 @@ public class WordsController : Controller
 
         return RedirectToAction("List", new { id = editWordsRequest.Id });
     }
-   
-    
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(EditWordsRequest editWordsRequest)
+    {
+        var deletedWord = await _wordsRepository.DeleteWordAsync(editWordsRequest.Id);
+
+        if (deletedWord != null)
+        {
+            // Show success notification
+            return RedirectToAction("List");
+        }
+
+        // Show an error notification
+        return RedirectToAction("Edit", new { id = editWordsRequest.Id });
+    }
 }
