@@ -1,0 +1,38 @@
+﻿@model BlazorSpanyol.Models.ViewModels.AddWordRequest
+@{
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Add Words - Admin Functionality</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Hungarian</label>
+            <input type="text" class="form-control" id="hungarian" asp-for="Hungarian" required/>
+            
+        </div>
+        <div class="mb-3">
+            <label class="form-label">English</label>
+            <input type="text" class="form-control" id="english" asp-for="English" required/>
+            
+            
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">English</label>
+            <input type="text" class="form-control" id="correctedSpanish" asp-for="CorrectSpanish" required/>
+            
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+    </form>
+</div>
+
+
+

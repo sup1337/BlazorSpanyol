@@ -1,0 +1,52 @@
+﻿@model BlazorSpanyol.Models.ViewModels.EditWordsRequest
+
+@{
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Edit Words - Admin Functionality</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+
+    @if(Model != null)
+    {
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">Id</label>
+                <input type="text" id="id" class="form-control" asp-for="Id" readonly/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">English</label>
+                <input type="text" id="name" class="form-control" asp-for="English" required/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Hungarian</label>
+                <input type="text" id="displayName" class="form-control" asp-for="Hungarian" required/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Spanish</label>
+                <input type="text" id="displayName" class="form-control" asp-for="CorrectSpanish" required/>
+            </div>
+            <div class="d-flex">
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-dark">Udate</button>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-danger ms-2"
+                            asp-area=""
+                            asp-controller="Words"
+                            asp-action="Delete">Delete</button>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <div class="alert alert-danger">Tag not found</div>
+    }
+</div>   

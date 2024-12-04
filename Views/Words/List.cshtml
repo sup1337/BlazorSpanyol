@@ -1,0 +1,49 @@
+﻿@model System.Collections.Generic.IEnumerable<BlazorSpanyol.Models.Domain.Words>
+
+@{
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+<div class="container">
+    <h1>Show All Words - Admin Functionality</h1>
+</div>
+</div>
+
+<div class="container py-5">
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Hungarian</th>
+                <th>English</th>
+                <th>Spanish</th>
+                <th>Actions</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var word in Model)
+            {
+                <tr>
+                    <td>@word.Id</td>
+                    <td>@word.Hungarian</td>
+                    <td>@word.English</td>
+                    <td>@word.CorrectSpanish</td>
+                    <td>
+                        <a asp-area="" 
+                           asp-controller="Words" 
+                           asp-action="Edit"
+                           asp-route-id="@word.Id">Edit</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Words found</p>
+    }
+</div>
