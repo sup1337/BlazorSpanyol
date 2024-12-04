@@ -166,3 +166,7 @@ C:\Users\laszl\RiderProjects\BlazorSpanyol\bin\Debug\net8.0\runtimes\browser\lib
 C:\Users\laszl\RiderProjects\BlazorSpanyol\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\laszl\RiderProjects\BlazorSpanyol\obj\Debug\net8.0\BlazorSpanyol.csproj.AssemblyReference.cache
 C:\Users\laszl\RiderProjects\BlazorSpanyol\obj\Debug\net8.0\BlazorSp.45282EB8.Up2Date
+C:\Users\laszl\RiderProjects\BlazorSpanyol\bin\Debug\net8.0\BlazorSpanyol.staticwebassets.endpoints.json
+C:\Users\laszl\RiderProjects\BlazorSpanyol\obj\Debug\net8.0\BlazorSpanyol.sourcelink.json
+C:\Users\laszl\RiderProjects\BlazorSpanyol\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\laszl\RiderProjects\BlazorSpanyol\obj\Debug\net8.0\staticwebassets\msbuild.BlazorSpanyol.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
