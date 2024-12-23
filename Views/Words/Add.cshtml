@@ -13,11 +13,13 @@
         <div class="mb-3">
             <label class="form-label">Hungarian</label>
             <input type="text" class="form-control" id="hungarian" asp-for="Hungarian" required/>
+            <span asp-validation-for="Hungarian" class="text-danger"></span>
             
         </div>
         <div class="mb-3">
             <label class="form-label">English</label>
             <input type="text" class="form-control" id="english" asp-for="English" required/>
+            <span asp-validation-for="English" class="text-danger"></span>
             
             
         </div>
@@ -25,6 +27,7 @@
         <div class="mb-3">
             <label class="form-label">Spanish</label>
             <input type="text" class="form-control" id="correctedSpanish" asp-for="CorrectSpanish" required/>
+            <span asp-validation-for="CorrectSpanish" class="text-danger"></span>
             
         </div>
 
@@ -33,6 +36,10 @@
         </div>
     </form>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 
 
 
