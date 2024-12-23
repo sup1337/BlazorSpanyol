@@ -19,21 +19,21 @@ public class QuizController : Controller
     [HttpGet]
     public async Task<IActionResult> Index(int numberOfQuestions)
     {
-        // Ha a numberOfQuestions <= 0, akkor alapértelmezetten 5 legyen
+        // Ha a numberOfQuestions <= 0, akkor alapértelmezetten 2 legyen
         if (numberOfQuestions <= 0)
         {
-            numberOfQuestions = 5;
+            numberOfQuestions = 2;
         }
 
         var words = await _wordsRepository.GetRandomWordsAsync(numberOfQuestions);
     
         // Ha nincs elég szó, ki kell jelezni valamit
-        if (words.Count < numberOfQuestions)
+        if (words == null || words.Count < numberOfQuestions)
         {
-            ModelState.AddModelError("", "Not enough words available for the quiz.");
-            return View("Error");
+            TempData["ErrorMessage"] = "Not enough words available for the quiz.";
+            return RedirectToAction("Create");
         }
-
+        
         var quizQuestions = words.Select(w => new QuizViewModel
         {
             Id = w.Id,
@@ -62,6 +62,10 @@ public class QuizController : Controller
     [HttpGet]
     public IActionResult Create()
     {
+        if (TempData["ErrorMessage"] != null)
+        {
+            ViewBag.ErrorMessage = TempData["ErrorMessage"];
+        }
         return View();
     }
 }
