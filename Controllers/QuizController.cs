@@ -16,7 +16,6 @@ public class QuizController : Controller
     
     // Quiz inditasa 
     [HttpGet]
-    [HttpGet]
     public async Task<IActionResult> Index(int numberOfQuestions)
     {
         // Ha a numberOfQuestions <= 0, akkor alapértelmezetten 2 legyen
@@ -28,7 +27,7 @@ public class QuizController : Controller
         var words = await _wordsRepository.GetRandomWordsAsync(numberOfQuestions);
     
         // Ha nincs elég szó, ki kell jelezni valamit
-        if (words == null || words.Count < numberOfQuestions)
+        if (words.Count < numberOfQuestions)
         {
             TempData["ErrorMessage"] = "Not enough words available for the quiz.";
             return RedirectToAction("Create");
