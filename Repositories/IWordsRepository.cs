@@ -13,4 +13,6 @@ public interface IWordsRepository
     Task<Words?> UpdateWordAsync(Words word);
     
     Task<Words?> DeleteWordAsync(Guid id);
+    
+    Task<List<Words>> GetRandomWordsAsync(int count);
 }

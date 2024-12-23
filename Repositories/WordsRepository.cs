@@ -59,4 +59,13 @@ public class WordsRepository : IWordsRepository
 
         return null;
     }
+    public async Task<List<Words>> GetRandomWordsAsync(int count)
+    {
+        var totalWords = await _spanishDbContext.Words.CountAsync();
+        if (count > totalWords)
+        {
+            count = totalWords;
+        }
+        return await _spanishDbContext.Words.OrderBy(words => Guid.NewGuid() ).Take(count).ToListAsync();
+    }
 }

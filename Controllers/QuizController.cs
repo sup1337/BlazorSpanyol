@@ -1,36 +1,50 @@
-﻿using BlazorSpanyol.Data;
-using BlazorSpanyol.Models.Domain;
+﻿using BlazorSpanyol.Models.Domain;
 using BlazorSpanyol.Models.ViewModels;
+using BlazorSpanyol.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorSpanyol.Controllers;
 
 public class QuizController : Controller
 {
-    private readonly SpanishDbContext _spanishDbContext;
-
-    public QuizController(SpanishDbContext spanishDbContext)
+    private readonly IWordsRepository _wordsRepository;
+    
+    public QuizController(IWordsRepository wordsRepository)
     {
-        _spanishDbContext = spanishDbContext;
+        _wordsRepository = wordsRepository;
     }
     
     // Quiz inditasa 
-    public IActionResult Index(int numberOfQuestions = 2)
+    [HttpGet]
+    [HttpGet]
+    public async Task<IActionResult> Index(int numberOfQuestions)
     {
-        var words = _spanishDbContext.Words
-            .OrderBy(w => Guid.NewGuid())
-            .Take(numberOfQuestions)
-            .Select(w => new Quiz()
-            {
-                Id = w.Id,
-                Hungarian = w.Hungarian,
-                English = w.English,
-                CorrectSpanish = w.CorrectSpanish
-            }).ToList();
-        return View(words);
+        // Ha a numberOfQuestions <= 0, akkor alapértelmezetten 5 legyen
+        if (numberOfQuestions <= 0)
+        {
+            numberOfQuestions = 5;
+        }
+
+        var words = await _wordsRepository.GetRandomWordsAsync(numberOfQuestions);
+    
+        // Ha nincs elég szó, ki kell jelezni valamit
+        if (words.Count < numberOfQuestions)
+        {
+            ModelState.AddModelError("", "Not enough words available for the quiz.");
+            return View("Error");
+        }
+
+        var quizQuestions = words.Select(w => new QuizViewModel
+        {
+            Id = w.Id,
+            Hungarian = w.Hungarian,
+            English = w.English,
+            CorrectSpanish = w.CorrectSpanish
+        }).ToList();
+
+        return View(quizQuestions);
     }
 
-    [HttpPost]
     public IActionResult Evaluate(List<Quiz> quizAnswers)
     {
         var results = quizAnswers.Select(q => new QuizResultViewModel()
@@ -43,5 +57,11 @@ public class QuizController : Controller
         }).ToList();
         
         return View("Results" ,results);
+    }
+
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
     }
 }
