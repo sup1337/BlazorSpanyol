@@ -15,7 +15,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Id</th>
                 <th>Hungarian</th>
                 <th>English</th>
                 <th>Spanish</th>
@@ -27,10 +26,10 @@
             @foreach (var word in Model)
             {
                 <tr>
-                    <td>@word.Id</td>
                     <td>@word.Hungarian</td>
                     <td>@word.English</td>
-                    <td>@word.CorrectSpanish</td>
+                    <td>@word.Infinitive</td>
+                    
                     <td>
                         <a asp-area="" 
                            asp-controller="Words" 

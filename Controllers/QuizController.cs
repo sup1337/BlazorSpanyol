@@ -38,7 +38,7 @@ public class QuizController : Controller
             Id = w.Id,
             Hungarian = w.Hungarian,
             English = w.English,
-            CorrectSpanish = w.CorrectSpanish
+            Infiinitive = w.Infinitive
         }).ToList();
 
         return View(quizQuestions);
