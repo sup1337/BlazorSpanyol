@@ -36,6 +36,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/laszl/RiderProjects/BlazorSpanyol/Views/Quiz/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/laszl/RiderProjects/BlazorSpanyol/Views/Quiz/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/laszl/RiderProjects/BlazorSpanyol/Views/Quiz/Results.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxSZXN1bHRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/laszl/RiderProjects/BlazorSpanyol/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -54,6 +66,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/laszl/RiderProjects/BlazorSpanyol/Views/Words/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29yZHNcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/laszl/RiderProjects/BlazorSpanyol/Views/Words/UploadFile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29yZHNcVXBsb2FkRmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/laszl/RiderProjects/BlazorSpanyol/Views/_ViewImports.cshtml]

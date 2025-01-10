@@ -1,6 +1,7 @@
 ﻿using BlazorSpanyol.Data;
 using BlazorSpanyol.Models.Domain;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 
 namespace BlazorSpanyol.Repositories;
 
@@ -124,5 +125,95 @@ public class WordsRepository : IWordsRepository
             count = totalWords;
         }
         return await _spanishDbContext.Words.OrderBy(words => Guid.NewGuid() ).Take(count).ToListAsync();
+    }
+
+    public async Task BulkInsertFromExcelAsync(string filePath)
+    {
+        using var package = new ExcelPackage(new FileInfo(filePath));
+        var worksheet = package.Workbook.Worksheets.FirstOrDefault();
+
+        if (worksheet == null)
+            throw new Exception("The Excel file is empty or invalid.");
+
+        var rowCount = worksheet.Dimension.Rows;
+
+        var wordsList = new List<Words>();
+
+        for (int row = 2; row <= rowCount; row++) // Feltételezzük, hogy az első sor a fejléc
+        {
+            var word = new Words
+            {
+                Hungarian = worksheet.Cells[row, 1].Text,
+                English = worksheet.Cells[row, 2].Text,
+                Italian = worksheet.Cells[row, 3].Text,
+                French = worksheet.Cells[row, 4].Text,
+                German = worksheet.Cells[row, 5].Text,
+                Infinitive = worksheet.Cells[row, 6].Text,
+                Gerund = worksheet.Cells[row, 7].Text,
+                Participle = worksheet.Cells[row, 8].Text,
+                Present1 = worksheet.Cells[row, 9].Text,
+                Present2 = worksheet.Cells[row, 10].Text,
+                Present3 = worksheet.Cells[row, 11].Text,
+                Present4 = worksheet.Cells[row, 12].Text,
+                Present5 = worksheet.Cells[row, 13].Text,
+                Present6 = worksheet.Cells[row, 14].Text,
+                Imperfect1 = worksheet.Cells[row, 15].Text,
+                Imperfect2 = worksheet.Cells[row, 16].Text,
+                Imperfect3 = worksheet.Cells[row, 17].Text,
+                Imperfect4 = worksheet.Cells[row, 18].Text,
+                Imperfect5 = worksheet.Cells[row, 19].Text,
+                Imperfect6 = worksheet.Cells[row, 20].Text,
+                Indefinite1 = worksheet.Cells[row, 21].Text,
+                Indefinite2 = worksheet.Cells[row, 22].Text,
+                Indefinite3 = worksheet.Cells[row, 23].Text,
+                Indefinite4 = worksheet.Cells[row, 24].Text,
+                Indefinite5 = worksheet.Cells[row, 25].Text,
+                Indefinite6 = worksheet.Cells[row, 26].Text,
+                Future1 = worksheet.Cells[row, 27].Text,
+                Future2 = worksheet.Cells[row, 28].Text,
+                Future3 = worksheet.Cells[row, 29].Text,
+                Future4 = worksheet.Cells[row, 30].Text,
+                Future5 = worksheet.Cells[row, 31].Text,
+                Future6 = worksheet.Cells[row, 32].Text,
+                Conditional1 = worksheet.Cells[row, 33].Text,
+                Conditional2 = worksheet.Cells[row, 34].Text,
+                Conditional3 = worksheet.Cells[row, 35].Text,
+                Conditional4 = worksheet.Cells[row, 36].Text,
+                Conditional5 = worksheet.Cells[row, 37].Text,
+                Conditional6 = worksheet.Cells[row, 38].Text,
+                SubjunctivePresent1 = worksheet.Cells[row, 39].Text,
+                SubjunctivePresent2 = worksheet.Cells[row, 40].Text,
+                SubjunctivePresent3 = worksheet.Cells[row, 41].Text,
+                SubjunctivePresent4 = worksheet.Cells[row, 42].Text,
+                SubjunctivePresent5 = worksheet.Cells[row, 43].Text,
+                SubjunctivePresent6 = worksheet.Cells[row, 44].Text,
+                SubjunctiveImperfect1 = worksheet.Cells[row, 45].Text,
+                SubjunctiveImperfect2 = worksheet.Cells[row, 46].Text,
+                SubjunctiveImperfect3 = worksheet.Cells[row, 47].Text,  
+                SubjunctiveImperfect4 = worksheet.Cells[row, 48].Text,
+                SubjunctiveImperfect5 = worksheet.Cells[row, 49].Text,
+                SubjunctiveImperfect6 = worksheet.Cells[row, 50].Text,
+                ImperativePositive2 = worksheet.Cells[row, 51].Text,
+                ImperativePositive3 = worksheet.Cells[row, 52].Text,
+                ImperativePositive4 = worksheet.Cells[row, 53].Text,
+                ImperativePositive5 = worksheet.Cells[row, 54].Text,
+                ImperativePositive6 = worksheet.Cells[row, 55].Text,
+                ImperativeNegative2 = worksheet.Cells[row, 56].Text,
+                ImperativeNegative3 = worksheet.Cells[row, 57].Text,
+                ImperativeNegative4 = worksheet.Cells[row, 58].Text,
+                ImperativeNegative5 = worksheet.Cells[row, 59].Text,
+                ImperativeNegative6 = worksheet.Cells[row, 60].Text
+                
+            };
+
+            wordsList.Add(word);
+        }
+
+        // Adatok mentése adatbázisba
+        // Használj megfelelő ORM-et (pl. EF Core)
+        foreach (var word in wordsList)
+        {
+            await AddWordAsync(word);
+        }
     }
 }

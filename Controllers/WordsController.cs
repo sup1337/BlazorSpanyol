@@ -87,11 +87,6 @@ public class WordsController : Controller
             ImperativeNegative4 = addWordRequest.ImperativeNegative4,
             ImperativeNegative5 = addWordRequest.ImperativeNegative5,
             ImperativeNegative6 = addWordRequest.ImperativeNegative6,
-            
-            
-            
-            
-            
         };
         await _wordsRepository.AddWordAsync(word);
         return RedirectToAction("List");
@@ -174,8 +169,6 @@ public class WordsController : Controller
                 ImperativeNegative4 = words.ImperativeNegative4,
                 ImperativeNegative5 = words.ImperativeNegative5,
                 ImperativeNegative6 = words.ImperativeNegative6
-                
-                
             };
 
             return View(editWordsRequest);
@@ -250,7 +243,6 @@ public class WordsController : Controller
         ImperativeNegative4 = editWordsRequest.ImperativeNegative4,
         ImperativeNegative5 = editWordsRequest.ImperativeNegative5,
         ImperativeNegative6 = editWordsRequest.ImperativeNegative6
-            
         };
 
         var updatedWord = await _wordsRepository.UpdateWordAsync(word);
@@ -280,5 +272,38 @@ public class WordsController : Controller
 
         // Show an error notification
         return RedirectToAction("Edit", new { id = editWordsRequest.Id });
+    }
+    
+    [HttpGet]
+    public IActionResult UploadFile()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadFile(IFormFile file)
+    {
+        if (file != null && file.Length > 0)
+        {
+           
+            var filePath = Path.GetTempFileName();
+            using (var stream = System.IO.File.Create(filePath))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+           
+            await _wordsRepository.BulkInsertFromExcelAsync(filePath);
+
+            
+            System.IO.File.Delete(filePath);
+
+            
+            return RedirectToAction("List");
+        }
+
+        
+        ViewBag.ErrorMessage = "No file uploaded";
+        return View();
     }
 }

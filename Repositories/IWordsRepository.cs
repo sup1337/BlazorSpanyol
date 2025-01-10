@@ -15,4 +15,6 @@ public interface IWordsRepository
     Task<Words?> DeleteWordAsync(Guid id);
     
     Task<List<Words>> GetRandomWordsAsync(int count);
+
+    Task BulkInsertFromExcelAsync(string filePath);
 }

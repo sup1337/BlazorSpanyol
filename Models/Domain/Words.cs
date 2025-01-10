@@ -13,6 +13,7 @@ public class Words
     public string French { get; set; }
     
     public string German { get; set; }
+    
     public string Infinitive { get; set; } // Helyes spanyol fordítás
     
     public string Gerund { get; set; }
