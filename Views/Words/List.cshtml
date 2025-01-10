@@ -40,7 +40,11 @@
                         <a asp-area="" 
                            asp-controller="Words" 
                            asp-action="Edit"
-                           asp-route-id="@word.Id">Edit</a>
+                           asp-route-id="@word.Id" class="btn btn-dark" >Edit</a>
+                        
+                        <form method="post" asp-action="DeleteFromList" asp-route-id="@word.Id" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                         
                     </td>
                 </tr>

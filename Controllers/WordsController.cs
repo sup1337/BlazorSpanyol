@@ -250,16 +250,19 @@ public class WordsController : Controller
         if (updatedWord != null)
         {
             // Show success notification
+            ViewBag.SuccessMessage = "Word updated successfully";
+            
         }
         else
         {
             // Show error notification
+            ViewBag.ErrorMessage = "Failed to update word";
         }
 
         return RedirectToAction("List", new { id = editWordsRequest.Id });
     }
 
-    [HttpPost]
+    
     [HttpPost]
 public async Task<IActionResult> Delete(Guid id)
 {
@@ -274,6 +277,20 @@ public async Task<IActionResult> Delete(Guid id)
     // Show an error notification
     return RedirectToAction("Edit", new { id });
 }
+    [HttpPost]
+    public async Task<IActionResult> DeleteFromList(Guid id)
+    {
+        var deletedWord = await _wordsRepository.DeleteWordAsync(id);
+
+        if (deletedWord != null)
+        {
+            // Show success notification
+            return RedirectToAction("List");
+        }
+
+        // Show an error notification
+        return RedirectToAction("List");
+    }
     
     [HttpGet]
     public IActionResult UploadFile()
