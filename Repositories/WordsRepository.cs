@@ -210,7 +210,6 @@ public class WordsRepository : IWordsRepository
         }
 
         // Adatok mentése adatbázisba
-        // Használj megfelelő ORM-et (pl. EF Core)
         foreach (var word in wordsList)
         {
             await AddWordAsync(word);

@@ -260,19 +260,20 @@ public class WordsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Delete(EditWordsRequest editWordsRequest)
+    [HttpPost]
+public async Task<IActionResult> Delete(Guid id)
+{
+    var deletedWord = await _wordsRepository.DeleteWordAsync(id);
+
+    if (deletedWord != null)
     {
-        var deletedWord = await _wordsRepository.DeleteWordAsync(editWordsRequest.Id);
-
-        if (deletedWord != null)
-        {
-            // Show success notification
-            return RedirectToAction("List");
-        }
-
-        // Show an error notification
-        return RedirectToAction("Edit", new { id = editWordsRequest.Id });
+        // Show success notification
+        return RedirectToAction("List");
     }
+
+    // Show an error notification
+    return RedirectToAction("Edit", new { id });
+}
     
     [HttpGet]
     public IActionResult UploadFile()

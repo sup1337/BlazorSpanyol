@@ -338,3 +338,7 @@
         <div class="alert alert-danger">Words not found</div>
     }
 </div>   
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
