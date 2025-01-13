@@ -125,6 +125,4 @@ public class AddWordRequest
     [Required]
     public string ImperativeNegative6 { get; set; }
     
-    
-    
 }

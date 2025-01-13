@@ -51,7 +51,7 @@ public class QuizController : Controller
             Hungarian = q.Hungarian,
             English = q.English,
             UserAnswer = q.UserAnswer,
-            CorrectSpanish = q.CorrectSpanish,
+            Infinitive = q.Infinitive,
             IsCorrect = q.IsCorrect
         }).ToList();
         

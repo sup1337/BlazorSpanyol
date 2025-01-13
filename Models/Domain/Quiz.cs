@@ -10,7 +10,7 @@ public class Quiz
     
     public string UserAnswer { get; set; }
     
-    public string CorrectSpanish { get; set; }
+    public string Infinitive { get; set; }
     
-    public bool IsCorrect => UserAnswer?.Trim().Equals(CorrectSpanish, StringComparison.OrdinalIgnoreCase) == true;
+    public bool IsCorrect => UserAnswer?.Trim().Equals(Infinitive, StringComparison.OrdinalIgnoreCase) == true;
 }

@@ -6,8 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthorization();
 builder.Services.AddDbContext<SpanishDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SpanishDbConnectionString")));
+
+builder.Services.AddDbContext<SpanishAuthDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SpanishAuthDbConnectionString")));
+
+
 
 builder.Services.AddScoped<IWordsRepository, WordsRepository>();
 
