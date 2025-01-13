@@ -54,7 +54,7 @@ public class QuizController : Controller
             Infinitive = q.Infinitive,
             IsCorrect = q.IsCorrect
         }).ToList();
-        //jghfyutfytdytrdytgfdtrdtred
+        //jghfyutfytdytrdy
         
         return View("Results" ,results);
     }
