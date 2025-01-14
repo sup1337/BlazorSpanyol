@@ -17,10 +17,7 @@ public class SpanishAuthDbContext : IdentityDbContext<ApplicationUser>
     public SpanishAuthDbContext(DbContextOptions<SpanishAuthDbContext> options) : base(options)
     {
     }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
-    }
+    
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
